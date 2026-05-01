@@ -18,6 +18,11 @@ const userSchema = new Schema(
       required: [true, "Please provide your password"],
       minlength: [6, "Password must be at least 6 characters"],
     },
+    profilePicture: {
+      type: String,
+      default:
+        "https://res.cloudinary.com/dzj6dhn0n/image/upload/v1690794417/default-profile-picture_ajlq8h.png",
+    },
   },
   {
     timestamps: true,

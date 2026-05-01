@@ -1,7 +1,7 @@
 import express from "express";
 import AppError from "./utils/appError.js";
-import authRoutes from "./routes/auth.route.js";
-import healthRoutes from "./routes/health.route.js";
+import authRoutes from "./routes/authRoute.js";
+import healthRoutes from "./routes/healthRoute.js";
 import cookieParser from "cookie-parser";
 import { config } from "./config/env.js";
 

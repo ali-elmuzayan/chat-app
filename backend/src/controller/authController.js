@@ -1,10 +1,11 @@
 import { access } from "fs";
 import User from "../model/userModel.js";
 import { authenticateUser } from "../services/authServices.js";
-import { hashPassword } from "../services/hashServices.js";
+import { comparePassword, hashPassword } from "../services/hashServices.js";
 import { validateSignUpRequest } from "../services/validationServices.js";
+import { catchAsync } from "../utils/handleErrors.js";
 
-const signUp = async (req, res) => {
+const signUp = catchAsync(async (req, res) => {
   const validatedRequest = validateSignUpRequest(req);
 
   if (!validatedRequest.isValid) {
@@ -47,9 +48,9 @@ const signUp = async (req, res) => {
       accessToken,
     },
   });
-};
+});
 
-const signIn = (req, res) => {
+const signIn = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({
@@ -59,7 +60,7 @@ const signIn = (req, res) => {
   }
 
   // TODO: 01) check the user exist in the database
-  const existUser = User.findOne({ email });
+  const existUser = await User.findOne({ email });
   if (!existUser) {
     return res.status(400).json({
       status: "fail",
@@ -67,7 +68,7 @@ const signIn = (req, res) => {
     });
   }
   // TODO: 02) check the password is correct
-  const isPasswordCorrect = existUser.comparePassword(password);
+  const isPasswordCorrect = await comparePassword(password, existUser.password);
   if (!isPasswordCorrect) {
     return res.status(400).json({
       status: "fail",
@@ -77,7 +78,6 @@ const signIn = (req, res) => {
   // TODO: 03) login the user successfully by return the token
   const accessToken = authenticateUser(existUser._id, res);
 
-  
   return res.status(200).json({
     status: "success",
     message: "you have login successfully",
@@ -85,13 +85,14 @@ const signIn = (req, res) => {
       accessToken,
     },
   });
-};
+});
 
-const signOut = (req, res) => {
+const signOut = catchAsync(async (req, res) => {
+  res.clearCookie("accessToken");
   return res.status(200).json({
     status: "success",
     message: "you have logout successfully",
   });
-};
+});
 
 export { signIn, signUp, signOut };

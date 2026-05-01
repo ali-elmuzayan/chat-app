@@ -17,4 +17,5 @@ export const authenticateUser = (userId, res) => {
 
   // TODO: await storeRefreshTokenInRedis(userId, refreshToken);
   setTokenCookies(res, accessToken);
+  return accessToken;
 };

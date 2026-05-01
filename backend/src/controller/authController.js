@@ -88,6 +88,8 @@ const signIn = catchAsync(async (req, res) => {
 });
 
 const signOut = catchAsync(async (req, res) => {
+  // TODO: the endpoint should be protected by the authentication middleware
+  // TODO: verify the refresh token and delete it from the redis
   res.clearCookie("accessToken");
   return res.status(200).json({
     status: "success",

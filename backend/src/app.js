@@ -2,6 +2,7 @@ import express from "express";
 import AppError from "./utils/appError.js";
 import authRoutes from "./routes/authRoute.js";
 import healthRoutes from "./routes/healthRoute.js";
+import usersRoutes from "./routes/usersRoute.js";
 import cookieParser from "cookie-parser";
 import { config } from "./config/env.js";
 
@@ -34,6 +35,7 @@ export const createApp = () => {
 
   // App Routes
   app.use(`${routesPrefix}/auth`, authRoutes);
+  app.use(`${routesPrefix}/users`, usersRoutes);
   app.use("/health", healthRoutes);
 
   // Catch all unknown routes

@@ -1,10 +1,9 @@
-import { access } from "fs";
 import type { Request, Response } from "express";
-import User from "../model/userModel";
-import { authenticateUser } from "../services/authServices";
-import { comparePassword, hashPassword } from "../services/hashServices";
-import { validateSignUpRequest } from "../services/validationServices";
-import { catchAsync } from "../utils/handleErrors";
+import User from "../model/userModel.js";
+import { authenticateUser } from "../services/authServices.js";
+import { comparePassword, hashPassword } from "../services/hashServices.js";
+import { validateSignUpRequest } from "../services/validationServices.js";
+import { catchAsync } from "../utils/handleErrors.js";
 
 const signUp = catchAsync(async (req: Request, res: Response) => {
   const validatedRequest = validateSignUpRequest(req);

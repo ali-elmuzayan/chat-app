@@ -1,12 +1,13 @@
-import express from "express";
-import AppError from "./utils/appError";
-import { globalErrorHandler } from "./services/errorServices";
-import authRoutes from "./routes/authRoute";
-import healthRoutes from "./routes/healthRoute";
-import usersRoutes from "./routes/usersRoute";
-import messageRoutes from "./routes/messageRoute";
 import cookieParser from "cookie-parser";
-import { config } from "./config/env";
+import express from "express";
+
+import { config } from "./config/env.js";
+import authRoutes from "./routes/authRoute.js";
+import healthRoutes from "./routes/healthRoute.js";
+import messageRoutes from "./routes/messageRoute.js";
+import usersRoutes from "./routes/usersRoute.js";
+import { globalErrorHandler } from "./services/errorServices.js";
+import AppError from "./utils/appError.js";
 
 export const createApp = () => {
   const app = express();
@@ -24,9 +25,6 @@ export const createApp = () => {
     });
   }
 
-  // global error handling middleware
-  app.use(globalErrorHandler);
-
   // App Routes
   app.use(`${routesPrefix}/auth`, authRoutes);
   app.use(`${routesPrefix}/users`, usersRoutes);
@@ -37,6 +35,9 @@ export const createApp = () => {
   app.use((req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} this page`, 404));
   });
+
+  // global error handling middleware
+  app.use(globalErrorHandler);
 
   return app;
 };

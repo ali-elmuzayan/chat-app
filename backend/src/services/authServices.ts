@@ -1,7 +1,10 @@
-import { config } from "../config/env";
-import { generateToken } from "./jwtServices";
+import type { Response } from "express";
+import type { Types } from "mongoose";
 
-export const setTokenCookies = (res, accessToken) => {
+import { config } from "../config/env.js";
+import { generateToken } from "./jwtServices.js";
+
+export const setTokenCookies = (res: Response, accessToken: string) => {
   res.cookie("accessToken", accessToken, {
     httpOnly: true, // prevent XSS attacks across-site scripting
     secure: config.nodeEnv === "production", // only send cookies over HTTPS in production
@@ -12,7 +15,7 @@ export const setTokenCookies = (res, accessToken) => {
 
 // TODO: Store the token in the redis
 
-export const authenticateUser = (userId, res) => {
+export const authenticateUser = (userId: Types.ObjectId, res: Response) => {
   const accessToken = generateToken(userId);
 
   // TODO: await storeRefreshTokenInRedis(userId, refreshToken);

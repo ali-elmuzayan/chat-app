@@ -5,8 +5,8 @@ dotenv.config();
 export interface Config {
   port: number;
   nodeEnv: string;
-  mongoURI?: string;
-  jwtSecret?: string;
+  mongoURI: string;
+  jwtSecret: string;
 }
 
 export const config: Config = {

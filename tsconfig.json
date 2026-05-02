@@ -1,10 +1,10 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
-  "extends": "@tsconfig/node22/tsconfig.json",
+  // "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
     // File Layout
-    // "rootDir": "./backend/src",
-    // "outDir": "./dist",
+    "rootDir": "./backend/src",
+    "outDir": "./dist",
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
@@ -36,12 +36,18 @@
 
     // Recommended Options
     "strict": true,
-    "jsx": "react-jsx",
+    // "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+
+    "baseUrl": "./backend/src",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
   "include": ["./backend/**/*.ts"]
   // "exclude": ["dist"]

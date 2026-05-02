@@ -1,11 +1,12 @@
 import { access } from "fs";
-import User from "../model/userModel.js";
-import { authenticateUser } from "../services/authServices.js";
-import { comparePassword, hashPassword } from "../services/hashServices.js";
-import { validateSignUpRequest } from "../services/validationServices.js";
-import { catchAsync } from "../utils/handleErrors.js";
+import type { Request, Response } from "express";
+import User from "../model/userModel";
+import { authenticateUser } from "../services/authServices";
+import { comparePassword, hashPassword } from "../services/hashServices";
+import { validateSignUpRequest } from "../services/validationServices";
+import { catchAsync } from "../utils/handleErrors";
 
-const signUp = catchAsync(async (req, res) => {
+const signUp = catchAsync(async (req: Request, res: Response) => {
   const validatedRequest = validateSignUpRequest(req);
 
   if (!validatedRequest.isValid) {
@@ -50,7 +51,7 @@ const signUp = catchAsync(async (req, res) => {
   });
 });
 
-const signIn = catchAsync(async (req, res) => {
+const signIn = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({
@@ -87,7 +88,7 @@ const signIn = catchAsync(async (req, res) => {
   });
 });
 
-const signOut = catchAsync(async (req, res) => {
+const signOut = catchAsync(async (req: Request, res: Response) => {
   // TODO: the endpoint should be protected by the authentication middleware
   // TODO: verify the refresh token and delete it from the redis
   res.clearCookie("accessToken");

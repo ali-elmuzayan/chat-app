@@ -1,4 +1,6 @@
-export const validateSignUpRequest = (req) => {
+import type { Request } from 'express';
+
+export const validateSignUpRequest = (req: Request) => {
     const { name, email, password, confirmPassword } = req.body;
     if (password !== confirmPassword) {
         return {

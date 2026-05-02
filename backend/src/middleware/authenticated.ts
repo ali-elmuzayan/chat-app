@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
-import User from "../model/userModel.js";
-import { config } from "../config/env.js";
-import { catchAsync } from "../utils/handleErrors.js";
-import { verifyToken } from "../services/jwtServices.js";
+import User from "../model/userModel";
+import { config } from "../config/env";
+import { catchAsync } from "../utils/handleErrors";
+import { verifyToken } from "../services/jwtServices";
 
 export const authenticated = catchAsync(async (req, res, next) => {
   const token = req.cookies.accessToken;

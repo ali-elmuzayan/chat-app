@@ -1,5 +1,5 @@
-import { config } from "../config/env.js";
-import { generateToken } from "./jwtServices.js";
+import { config } from "../config/env";
+import { generateToken } from "./jwtServices";
 
 export const setTokenCookies = (res, accessToken) => {
   res.cookie("accessToken", accessToken, {

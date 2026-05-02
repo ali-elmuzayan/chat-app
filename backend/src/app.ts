@@ -1,12 +1,12 @@
 import express from "express";
-import AppError from "./utils/appError.js";
-import { globalErrorHandler } from "./services/errorServices.js";
-import authRoutes from "./routes/authRoute.js";
-import healthRoutes from "./routes/healthRoute.js";
-import usersRoutes from "./routes/usersRoute.js";
-import messageRoutes from "./routes/messageRoute.js";
+import AppError from "./utils/appError";
+import { globalErrorHandler } from "./services/errorServices";
+import authRoutes from "./routes/authRoute";
+import healthRoutes from "./routes/healthRoute";
+import usersRoutes from "./routes/usersRoute";
+import messageRoutes from "./routes/messageRoute";
 import cookieParser from "cookie-parser";
-import { config } from "./config/env.js";
+import { config } from "./config/env";
 
 export const createApp = () => {
   const app = express();

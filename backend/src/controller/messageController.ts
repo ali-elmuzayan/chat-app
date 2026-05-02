@@ -1,10 +1,12 @@
-import { catchAsync } from "../utils/handleErrors.js";
-import conversation from "../model/conversationModel.js";
-import Message from "../model/messageModel.js";
-import User from "../model/userModel.js";
+import type { Request, Response, NextFunction } from "express";
+import { catchAsync } from "../utils/handleErrors";
+import AppError from "../utils/appError";
+import conversation from "../model/conversationModel";
+import Message from "../model/messageModel";
+import User from "../model/userModel";
 
 // Send a message to a user with the specified ID
-export const sendMessage = catchAsync(async (req, res, next) => {
+export const sendMessage = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const { message } = req.body;
   const { id: receiverId } = req.params;
   const senderId = req.user.id;

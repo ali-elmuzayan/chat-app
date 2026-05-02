@@ -1,4 +1,11 @@
-export const globalErrorHandler = (err, req, res, next) => {
+import type { Request } from "express";
+
+export const globalErrorHandler = (
+  err: any,
+  req: Request,
+  res: any,
+  next: any,
+) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 

@@ -1,8 +1,10 @@
 import express from "express";
 import AppError from "./utils/appError.js";
+import { globalErrorHandler } from "./services/errorServices.js";
 import authRoutes from "./routes/authRoute.js";
 import healthRoutes from "./routes/healthRoute.js";
 import usersRoutes from "./routes/usersRoute.js";
+import messageRoutes from "./routes/messageRoute.js";
 import cookieParser from "cookie-parser";
 import { config } from "./config/env.js";
 
@@ -23,19 +25,12 @@ export const createApp = () => {
   }
 
   // global error handling middleware
-  app.use((err, req, res, next) => {
-    err.statusCode = err.statusCode || 500;
-    err.status = err.status || "error";
-
-    return res.status(err.statusCode).json({
-      status: err.status,
-      message: err.message,
-    });
-  });
+  app.use(globalErrorHandler);
 
   // App Routes
   app.use(`${routesPrefix}/auth`, authRoutes);
   app.use(`${routesPrefix}/users`, usersRoutes);
+  app.use(`${routesPrefix}/messages`, messageRoutes);
   app.use("/health", healthRoutes);
 
   // Catch all unknown routes

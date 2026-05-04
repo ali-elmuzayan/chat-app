@@ -1,12 +1,34 @@
-import { Button } from "./components/ui/button";
+import { Route, Routes } from "react-router";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
+import AuthLayout from "./layouts/AuthLayout";
+import AppLayout from "./layouts/AppLayout";
+import Home from "./pages/App/Home";
+import Profile from "./pages/App/Profile";
+import Settings from "./pages/App/Settings";
+import ProtectRoute from "./components/ProtectRoute";
 
-function App() {
+const App = () => {
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold text-center pt-10">Welcome to the App!</h1>
-      <Button className="mx-auto mt-5">Click Me</Button>
-    </div>
+    <>
+      <Routes>
+        {/* Authentication Routes */}
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+
+        {/* Admin Routes */}
+        <Route element={<ProtectRoute />}>
+          <Route path="/" element={<AppLayout />}>
+            <Route index element={<Home />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+        </Route>
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;

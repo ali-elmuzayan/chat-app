@@ -32,9 +32,11 @@ const userSchema = new Schema<IUser>(
       type: String,
     },
   },
+  // For forget password reset token 
+  
   {
     timestamps: true,
-  },
+  },  
 );
 
 const User = mongoose.model<IUser>("User", userSchema);

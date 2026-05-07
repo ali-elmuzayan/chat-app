@@ -2,16 +2,10 @@ import { Outlet } from "react-router";
 
 const AppLayout = () => {
   return (
-    <div>
-      <header>
-        <h1>HRMS</h1>
-      </header>
-      <main>
+    <div className="min-h-screen bg-linear-to-br from-background via-muted/40 to-background">
+      <main className="min-h-screen p-3 md:p-6">
         <Outlet />
       </main>
-      <footer>
-        <p>Copyright 2026 HRMS</p>
-      </footer>
     </div>
   );
 };

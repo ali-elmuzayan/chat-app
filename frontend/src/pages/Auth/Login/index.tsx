@@ -9,6 +9,7 @@ const Login = () => {
           <h2 className="text-2xl font-semibold tracking-tight">Welcome back</h2>
           <p className="text-sm text-muted-foreground">Sign in to continue your conversations.</p>
         </div>
+  
         <LoginForm />
         <LoginLinks />
       </div>

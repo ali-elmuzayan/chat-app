@@ -1,5 +1,6 @@
 import cookieParser from "cookie-parser";
 import express from "express";
+import path from "path";
 
 import { config } from "./config/env.js";
 import authRoutes from "./routes/authRoute.js";
@@ -12,6 +13,7 @@ import AppError from "./utils/appError.js";
 export const createApp = () => {
   const app = express();
   const routesPrefix = "/api/v1";
+  const __dirname = path.resolve();
 
   // middleware:
   app.use(express.json()); // for the parsing application/json
@@ -38,6 +40,12 @@ export const createApp = () => {
 
   // global error handling middleware
   app.use(globalErrorHandler);
+
+  // absolute path for the server:
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+  });
 
   return app;
 };

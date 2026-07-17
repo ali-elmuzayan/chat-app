@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsx --watch backend/src/server.ts",
     "start": "node dist/server.js",
-    "build": "tsc",
+    "build": "tsc && npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
